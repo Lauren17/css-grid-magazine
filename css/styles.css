@@ -1,0 +1,201 @@
+html { font-size: 62.5%; }
+body {
+    font-family: sans-serif;
+    color: #323232;
+    font-size: 1.6rem;
+}
+
+header,
+.grid-container{
+    padding: 1rem;
+}
+
+/***** typography *****/
+
+h1 {
+    font-size: 3.8rem;
+    line-height: 7.2rem;
+    margin-right: 1rem;
+}
+
+h2 {
+    font-size: 2.8rem;
+    line-height: 4.8rem;
+}
+
+h3 {
+    font-size: 2.1rem;
+    line-height: 2.4rem;
+}
+
+p {
+    margin-bottom: 2.4rem;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 0 1rem;
+}
+
+/** header **/
+header {
+    border-bottom: 0.1rem solid rgb(222,222,222);
+    box-shadow: 0 0 0.8rem rgb(222,222,222);
+}
+
+header .header-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-icon {
+    width: 5rem;
+    padding: 0.5rem;
+}
+
+nav {
+    flex: 1;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 600ms ease-in-out;
+}
+
+.active {
+    max-height: 100vh;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap row;
+}
+
+.nav-links li {
+    line-height: 4.5rem;
+}
+
+/****** Grid Layout: Step 1: Layout the larger page elements: header, sections, and the footer ******/
+.grid-container {
+    display: grid;
+    gap: 1rem;
+    /** this creates an implicit grid, meaning that columns have not yet been defined and it used the default one column, stacking layout which works well for mobile */
+}
+
+/** go ahead and layout the content inside the grid cells (using flow, flexbox, grid, or multi-columns) for the mobile view **/
+
+.card {
+    border: 0.1rem solid rgb(222,222,222);
+    border-radius: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.card img {
+    margin-bottom: 2.4rem;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.card > div {
+    margin: 0 1rem;
+}
+
+footer {
+    border-top: 0.1rem solid rgb(222,222,222);
+    padding-top: 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -1rem;
+}
+
+footer > div {
+    margin: 0 1rem 2rem 1rem;
+    flex: 1;
+}
+
+/*480*/
+@media (min-width: 30rem) {
+    .card {
+        display: flex;
+        align-items: flex-start;
+        flex-flow: wrap;
+    }
+
+    .card img {
+        margin: 0;
+        border-radius: 0.3rem;
+        flex: 1;
+        /** can fix up this issue of the image into the card better with the pictutre element/srcset thumbnail **/
+        width: 35%;
+    }
+
+    .card > div {
+        flex: 2;
+        margin: 1rem;
+    }
+
+}
+
+/** find a breakpoint to best show the nav and add a max-width **/
+/*730px */
+@media (min-width: 45.625rem) {
+    .menu-icon { display: none; }
+    
+    nav {
+        max-height: 10rem;
+        flex: initial;
+    }
+    header > .inner-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-links li { margin: 0 1rem;}
+
+}
+
+/**** Grid Layout Step 2: add and define the grid columns for larger views. place content *****/
+
+/**1000**/
+@media (min-width: 62.5rem) {
+    .grid-container {
+        /** use a 12-col grid system */
+        grid-template-columns: repeat(12, 1fr);
+        /** or, realizing that this container will have a max of 2 columns, the first spanning 8/12 columns, and the second spanning 4/12 columns **/
+        grid-template-columns: 8fr 4fr;
+    }
+    /** explicitly place grid items - section (recents posts), section (popular), and the footer */
+
+    .recent-posts {
+        grid-column: 1 / span 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .recent-posts > div:first-of-type {
+        grid-column: 1 / span 2;
+    }
+
+    /** popular **/
+    .popular {
+        grid-column: 2 / -1;
+    }
+
+    /** footer **/
+    footer {
+        grid-column: 1 / -1;
+    }
+
+}
+
+/**1760**/
+@media (min-width: 110rem) {
+    .grid-container,
+    .inner-container {
+        max-width: 160rem; /**1600px**/
+        margin: 0 auto;
+    }
+}
